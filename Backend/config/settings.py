@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-$pcwa5(2dcp_hs=%(kq%4p++j6q&)d2^9m$t*s$31$4_q)-vlg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".onrender.com"]
 
 
 # Application definition
@@ -62,6 +62,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5174",
     "http://127.0.0.1:5173",
     "http://127.0.0.1:5174",
+    "https://your-project.vercel.app",
+     
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -131,6 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Media files (uploads like avatars)
 MEDIA_URL = '/media/'
