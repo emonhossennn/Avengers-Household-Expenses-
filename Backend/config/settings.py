@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-$pcwa5(2dcp_hs=%(kq%4p++j6q&)d2^9m$t*s$31$4_q)-vlg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [".onrender.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com"]
 
 
 # Application definition
@@ -62,8 +62,12 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5174",
     "http://127.0.0.1:5173",
     "http://127.0.0.1:5174",
+    # ⬇️ Replace with your real Vercel URL after deploying
     "https://your-project.vercel.app",
-     
+]
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.vercel\.app$",
 ]
 
 ROOT_URLCONF = 'config.urls'
