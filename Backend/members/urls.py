@@ -12,6 +12,8 @@ router.register(
     basename="member",
 )
 
-urlpatterns = router.urls + [
+# ⚠️ meals/ MUST come before router.urls
+# otherwise the router's members/{pk}/ pattern swallows it
+urlpatterns = [
     path("members/meals/", MealCountView.as_view(), name="meal-counts"),
-]
+] + router.urls

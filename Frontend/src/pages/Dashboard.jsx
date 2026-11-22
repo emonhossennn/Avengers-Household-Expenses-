@@ -4,13 +4,10 @@ import ExpenseDetailsModal from "../components/ExpenseDetailsModal";
 import MemberSpending from "../components/MemberSpending";
 import MealCounter from "../components/MealCounter";
 import {
-    CalendarDays,
-    Check,
     Pencil,
     Plus,
     RefreshCw,
     Trash2,
-    X,
 } from "lucide-react";
 
 import { useMember } from "../context/MemberContext";
@@ -30,10 +27,6 @@ import {
     getExpenses,
     deleteExpense,
 } from "../services/expenseService";
-
-import {
-    updateMemberName,
-} from "../services/memberService";
 
 import { themes } from "../themes/themes";
 
@@ -88,7 +81,7 @@ function getCategoryIcon(category) {
 
 
 function Dashboard() {
-    const { selectedMember, setSelectedMember } = useMember();
+    const { selectedMember } = useMember();
 
     const [currentDate, setCurrentDate] = useState(new Date());
     const [summary, setSummary] = useState(null);
@@ -100,12 +93,6 @@ function Dashboard() {
     const [showExpenseModal, setShowExpenseModal] = useState(false);
     const [selectedExpense, setSelectedExpense] = useState(null);
     const [editingExpense, setEditingExpense] = useState(null);
-
-    // Name editing state
-    const [editingName, setEditingName] = useState(false);
-    const [nameInput, setNameInput] = useState("");
-    const [nameSaving, setNameSaving] = useState(false);
-    const [nameError, setNameError] = useState("");
 
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth() + 1;
@@ -432,60 +419,12 @@ function Dashboard() {
                         <h1>
                             Welcome, {selectedMember?.name || "Avenger"}
                         </h1>
-
-                        {/* Inline name editor */}
-                        {editingName ? (
-                            <div className="name-edit-row">
-                                <input
-                                    className="name-edit-input"
-                                    value={nameInput}
-                                    onChange={(e) => setNameInput(e.target.value)}
-                                    onKeyDown={(e) => {
-                                        if (e.key === "Enter") saveNameEdit();
-                                        if (e.key === "Escape") cancelNameEdit();
-                                    }}
-                                    autoFocus
-                                    maxLength={50}
-                                    disabled={nameSaving}
-                                />
-                                <button
-                                    type="button"
-                                    className="name-edit-confirm"
-                                    onClick={saveNameEdit}
-                                    disabled={nameSaving}
-                                    title="Save name"
-                                >
-                                    <Check size={15} />
-                                </button>
-                                <button
-                                    type="button"
-                                    className="name-edit-cancel"
-                                    onClick={cancelNameEdit}
-                                    disabled={nameSaving}
-                                    title="Cancel"
-                                >
-                                    <X size={15} />
-                                </button>
-                                {nameError && (
-                                    <span className="name-edit-error">{nameError}</span>
-                                )}
-                            </div>
-                        ) : (
-                            <p className="dashboard-subtitle">
-                                {selectedMember?.hero_display ||
-                                    selectedMember?.hero ||
-                                    "House Member"}{" "}
-                                • House Finance Command Center{" "}
-                                <button
-                                    type="button"
-                                    className="name-edit-trigger"
-                                    onClick={startEditingName}
-                                    title="Edit your name"
-                                >
-                                    <Pencil size={12} /> Edit Name
-                                </button>
-                            </p>
-                        )}
+                        <p className="dashboard-subtitle">
+                            {selectedMember?.hero_display ||
+                                selectedMember?.hero ||
+                                "House Member"}{" "}
+                            • House Finance Command Center
+                        </p>
                     </div>
 
                     <div className="month-selector">
